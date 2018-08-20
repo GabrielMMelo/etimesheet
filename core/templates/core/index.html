@@ -75,7 +75,7 @@
   		</div>
 	</form>
 
-	<table class="table table-striped table-bordered">
+	<table id="horario" class="table table-striped table-bordered">
 		<thead>
 		  	<tr>
 				<th>Horário</th>
@@ -251,6 +251,16 @@
 		  	</tr>
 		</tbody>
   	</table>
+
+  	{% for h in timesheet%}
+  		{% if h.day == "Seg" and h.time == "09:00" %}
+  			<script>
+			    var x = document.getElementById("horario").rows[3].cells;
+			    x[2].innerHTML = "{{ h.name }}" + ", " + "{{ h.role }}"
+			</script>
+  		{% endif %}
+  	{% endfor %}
+
 </div>
 
 </body>
