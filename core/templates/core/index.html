@@ -24,12 +24,14 @@
 		<div class="row">
 			<div class="col">
 				<label>Filtrar a tabela por nome:</label>
-				<select class="custom-select" name="name-select">
+				<select class="custom-select" id="name-select">
 					<option selected></option>
 					{% for n in timesheet %}
 					<option value="{{ n.name }}">{{ n.name }}</option>
 					{% endfor %}
 				</select>
+
+				<button class="glyphicon glyphicon-plus btn btn-primary" onclick="createName()"></button>
 			</div>
 
 			<div class="col">
@@ -91,7 +93,7 @@
 		<tbody>
 		  	<tr>
 				<td>07:00</td>
-				<td></td>
+				<td><input type="button" style="width:100%" onclick="getRowColumn(this)"></td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -252,15 +254,29 @@
 		</tbody>
   	</table>
 
-  	{% for h in timesheet%}
-  		{% if h.day == "Seg" and h.time == "09:00" %}
-  			<script>
-			    var x = document.getElementById("horario").rows[3].cells;
-			    x[2].innerHTML = "{{ h.name }}" + ", " + "{{ h.role }}"
-			</script>
-  		{% endif %}
+  	{% for h in timesheet %}
+		<script type="text/javascript">
+		    var x = document.getElementById("horario").rows[ {{ h.row }} ].cells;
+		    x[ {{ h.column }} ].innerHTML = "{{ h.name }}" + ", " + "{{ h.role }}";
+		</script>
   	{% endfor %}
 
 </div>
+
+<script type="text/javascript">
+	// pensar em uma forma de passar o row e column para o django
+	function getRowColumn(element) {
+		var row = element.closest('tr').rowIndex;
+		var column = element.closest('td').cellIndex;
+		alert(row + ", " + column);
+	}
+
+	// nao funciona dar um jeito de clonar o elemento html
+	function createName(){
+	    var select = document.getElementById("name-select");
+	    var newSelect = select.cloneNode(true);
+		document.body.appendChild(newSelect)
+	}
+</script>
 
 </body>

@@ -49,3 +49,5 @@ class Timesheet(models.Model):
 	role = models.CharField(max_length=100, choices=ROLE_CHOICE)
 	time = models.CharField(max_length=10, choices=TIME_CHOICE)
 	day = models.CharField(max_length=10, choices=DAY_CHOICE)
+	row = models.IntegerField()
+	column = models.IntegerField()
