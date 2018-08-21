@@ -264,10 +264,9 @@
 </div>
 
 <script type="text/javascript">
-	// pensar em uma forma de passar o row e column para o django
+    // Get all td and assign an on click event for each one
     var schedules = document.getElementsByTagName("td");
     for (i=0; i<schedules.length; i++) {
-        //schedules[i].onclick = function(){myScript};
         schedules[i].onclick = function () {
             var row = this.closest('tr').rowIndex;
             var column = this.closest('td').cellIndex;
