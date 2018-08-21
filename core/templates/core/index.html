@@ -270,7 +270,15 @@
         schedules[i].onclick = function () {
             var row = this.closest('tr').rowIndex;
             var column = this.closest('td').cellIndex;
-            if (column) alert(row + ", " + column);
+
+            // Event triggered when modal is showed. Used to mount form input properly
+            $('#exampleModal').on('show.bs.modal', function(){
+                var modal = $(this);
+                modal.find("#modal_row").text("Row: " + row);
+                modal.find("#modal_column").text("Column: " + column);
+            });
+
+            if (column) $('#exampleModal').modal('show');
         };
     }
 
@@ -281,5 +289,29 @@
 		document.body.appendChild(newSelect)
 	}
 </script>
+
+
+<!-- MODAL -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h1 id="modal_row"></h1>
+        <h1 id="modal_column"></h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
