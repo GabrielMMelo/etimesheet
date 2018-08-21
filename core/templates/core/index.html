@@ -93,7 +93,7 @@
 		<tbody>
 		  	<tr>
 				<td>07:00</td>
-				<td><input type="button" style="width:100%" onclick="getRowColumn(this)"></td>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -265,11 +265,15 @@
 
 <script type="text/javascript">
 	// pensar em uma forma de passar o row e column para o django
-	function getRowColumn(element) {
-		var row = element.closest('tr').rowIndex;
-		var column = element.closest('td').cellIndex;
-		alert(row + ", " + column);
-	}
+    var schedules = document.getElementsByTagName("td");
+    for (i=0; i<schedules.length; i++) {
+        //schedules[i].onclick = function(){myScript};
+        schedules[i].onclick = function () {
+            var row = this.closest('tr').rowIndex;
+            var column = this.closest('td').cellIndex;
+            alert(row + ", " + column);
+        };
+    }
 
 	// nao funciona dar um jeito de clonar o elemento html
 	function createName(){
