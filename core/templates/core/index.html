@@ -271,7 +271,7 @@
         schedules[i].onclick = function () {
             var row = this.closest('tr').rowIndex;
             var column = this.closest('td').cellIndex;
-            alert(row + ", " + column);
+            if (column) alert(row + ", " + column);
         };
     }
 
