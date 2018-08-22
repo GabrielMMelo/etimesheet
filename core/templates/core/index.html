@@ -20,6 +20,7 @@
 <div class="container">
 	<h2>TimeSheet EMakers</h2>
 
+<!-- Form search -->
 {% block search %}
 
 {% endblock %}
@@ -210,8 +211,12 @@
 
 </div>
 
-<!-- MODAL -->
+<!-- SAVE - UPDATE - DELETE -->
+{% block manage %}
 
+{% endblock %}
+
+<!-- MODAL -->
 {% block modal %}
 
 {% endblock %}
@@ -240,18 +245,6 @@
 	    var newSelect = select.cloneNode(true);
 		document.body.appendChild(newSelect)
 	}
-
-	$(document).ready(function(){
-    	$("#name-select2").html($("#name-select").html());
-	});
-
-	$(document).ready(function(){
-   		$("#time-select2").html($("#time-select").html());
-	});
-
-	$(document).ready(function(){
-   	 	$("#day-select2").html($("#day-select").html());
-	});
 
 </script>
 

@@ -117,3 +117,19 @@
 	</div>
 </div>
 {% endblock %}
+
+{% block manage %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<a href="{% url 'save' %}"><input type="button" class="btn btn-outline-danger" value="Criar"></a>
+		</div>
+		<div class="col-md-4">
+			<a href=""><input type="button" class="btn btn-outline-danger" value="Editar"></a>
+		</div>
+		<div class="col-md-4">
+			<a href=""><input type="button" class="btn btn-outline-danger" value="Excluir"></a>
+		</div>
+	</div>
+</div>
+{% endblock %}

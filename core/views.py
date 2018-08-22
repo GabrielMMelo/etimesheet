@@ -1,15 +1,14 @@
 from django.shortcuts import render, redirect
+from core.forms import TimesheetForm
 
-from .models import Timesheet
+from core.models import Timesheet, Name, Role
 # Create your views here.
 
 def index(request):
 	if request.method == "GET":
 		context = {
 			'timesheet': Timesheet.objects.all(),
-
-			#all names without duplicate value
-			'names': Timesheet.objects.all().distinct('name')
+			'names': Name.objects.all()
 		}
 	else:
 		context = {
@@ -18,23 +17,18 @@ def index(request):
 	return render(request, 'core/info.html', context=context)
 
 def save(request):
-	# try using form or model form
+	form = TimesheetForm(request.POST or None)
 	if request.method == "POST":
-		name = request.POST.get('name')
-		time = request.POST.get('time')
-		day = request.POST.get('day')
-		role = request.POST.get('role')
-		row = request.POST.get('row')
-		column = request.POST.get('column')
-		t = Timesheet(name=name, role=role, time=time, day=day, row=row, column=column)
-		t.save()
-
-		return redirect('index')
+		if form.is_valid():
+			model_instance = form.save(commit=False)
+			model_instance.row = request.POST['row']
+			model_instance.column = request.POST['column']
+			model_instance.save()
+			return redirect('index')
 
 	context = {
-		'timesheet': Timesheet.objects.all(),
-
-		#all names without duplicate value
-		'names': Timesheet.objects.all().distinct('name')
+		'names': Name.objects.all(),
+		'roles': Role.objects.all(),
+		'form': form,
 	}
 	return render(request, 'core/save.html', context=context)
