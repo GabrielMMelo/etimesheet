@@ -2,7 +2,13 @@ from django.db import models
 
 # Create your models here.
 
-class Timesheet(models.Model):
+class Name(models.Model):
+	name = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.name
+
+class Role(models.Model):
 	ROLE_CHOICE = (
 		('Coordenador', 'Coordenador'),
 		('Diretor Presidente', 'Diretor Presidente'),
@@ -16,6 +22,12 @@ class Timesheet(models.Model):
 		('Membro', 'Membro'),
 	)
 
+	role = models.CharField(max_length=100, choices=ROLE_CHOICE)
+
+	def __str__(self):
+		return self.role
+
+class Timesheet(models.Model):
 	TIME_CHOICE = (
 		('07:00', '07:00'),
 		('08:00', '08:00'),
@@ -44,9 +56,8 @@ class Timesheet(models.Model):
 		('Sex', 'Sex'),
 		('Sáb', 'Sáb'),
 	)
-
-	name = models.CharField(max_length=100)
-	role = models.CharField(max_length=100, choices=ROLE_CHOICE)
+	name = models.ForeignKey(Name, on_delete=models.DO_NOTHING)
+	role = models.ForeignKey(Role, on_delete=models.DO_NOTHING)
 	time = models.CharField(max_length=10, choices=TIME_CHOICE)
 	day = models.CharField(max_length=10, choices=DAY_CHOICE)
 	row = models.IntegerField()
