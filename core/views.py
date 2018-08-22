@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from core.forms import TimesheetForm
+from django.db.models import Q 
 
+from core.forms import TimesheetForm
 from core.models import Timesheet, Name, Role
 # Create your views here.
 
@@ -11,8 +12,27 @@ def index(request):
 			'names': Name.objects.all()
 		}
 	else:
-		context = {
+		name = request.POST['name']
+		time = request.POST['time']
+		day = request.POST['day']
 
+		timesheet = Timesheet.objects.all()
+
+		if name != None and time != None and day != None:
+			timesheet = Timesheet.objects.filter(Q(name__name=name) &
+												  Q(time=time) &
+												  Q(day=day))
+		elif (name != None) and (time == None) and (day == None):
+			timesheet = Timesheet.objects.filter(Q(name__name=name))
+		elif name == None and time != None and day == None:
+			timesheet = Timesheet.objects.filter(Q(time=time))
+		elif name == None and time == None and day != None:
+			timesheet = Timesheet.objects.filter(Q(day=day))
+
+
+		context = {
+			'timesheet': timesheet,
+			'names': Name.objects.all(),
 		}
 	return render(request, 'core/info.html', context=context)
 

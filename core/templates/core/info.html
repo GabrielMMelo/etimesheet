@@ -2,14 +2,14 @@
 {% load static %}
 
 {% block search %}
-<form method="POST" action="">
+<form method="POST" action="{% url 'index' %}">
 {% csrf_token %}
 	<div class="row">
 		<div class="col">
 			<label>Filtrar a tabela por nome:</label>
 			<div id="name-select">
 				<select class="custom-select" name="name">
-					<option selected></option>
+					<option></option>
 					{% for n in names %}
 					<option value="{{ n.name }}">{{ n.name }}</option>
 					{% endfor %}
@@ -23,7 +23,7 @@
 			<label>Filtrar a tabela por horário:</label>
 			<div id="time-select">
 				<select class="custom-select" name="time">
-					<option selected></option>
+					<option></option>
 					<option value="07:00">07:00</option>
 					<option value="08:00">08:00</option>
 					<option value="09:00">09:00</option>
@@ -48,7 +48,7 @@
 			<label>Filtrar a tabela por dia:</label>
 			<div id="day-select">
 				<select class="custom-select" name="day">
-					<option selected></option>
+					<option></option>
 					<option value="Dom">Dom</option>
 					<option value="Seg">Seg</option>
 					<option value="Ter">Ter</option>
