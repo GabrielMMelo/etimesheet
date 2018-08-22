@@ -10,6 +10,7 @@
 	<title>Timesheet</title>
 
 	<link rel="stylesheet" type="text/css" href = "{% static 'bootstrap/compiler/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href = "{% static 'style/table.css' %}">
 	<script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
 	<script src="{% static 'bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/compiler/style.css' %}">
@@ -222,7 +223,6 @@
         schedules[i].onclick = function () {
             var row = this.closest('tr').rowIndex;
             var column = this.closest('td').cellIndex;
-
             // Event triggered when modal is showed. Used to mount form input properly
             $('#exampleModal').on('show.bs.modal', function(){
                 var modal = $(this);
