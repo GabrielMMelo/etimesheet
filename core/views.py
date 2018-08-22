@@ -7,7 +7,7 @@ def index(request):
 	if request.method == "GET":
 		context = {
 			'timesheet': Timesheet.objects.all(),
-			
+
 			#all names without duplicate value
 			'names': Timesheet.objects.all().distinct('name')
 		}
@@ -15,7 +15,7 @@ def index(request):
 		context = {
 
 		}
-	return render(request, 'core/index.html', context=context)
+	return render(request, 'core/info.html', context=context)
 
 def save(request):
 	# try using form or model form
@@ -30,3 +30,11 @@ def save(request):
 		t.save()
 
 		return redirect('index')
+
+	context = {
+		'timesheet': Timesheet.objects.all(),
+
+		#all names without duplicate value
+		'names': Timesheet.objects.all().distinct('name')
+	}
+	return render(request, 'core/save.html', context=context)
