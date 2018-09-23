@@ -1,54 +1,41 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_GET, require_POST
 from django.db.models import Q 
+from django.contrib.auth.models import User
 
-from core.forms import TimesheetForm
-from core.models import Timesheet, Name, Role
+from core.forms import TimeTable
+from core.models import Person, TimeTable
 # Create your views here.
 
+@login_required
 def index(request):
 	if request.method == "GET":
+		person = Person.objects.get(user=request.user.id)
 		context = {
-			'timesheet': Timesheet.objects.all(),
-			'names': Name.objects.all()
+			'person': person,
+			'timetable': TimeTable.objects.filter(person=person.id),
+			'users': User.objects.values_list('first_name')
 		}
-	else:
-		name = request.POST['name']
-		time = request.POST['time']
-		day = request.POST['day']
 
-		timesheet = Timesheet.objects.all()
-
-		if name != None and time != None and day != None:
-			timesheet = Timesheet.objects.filter(Q(name__name=name) &
-												  Q(time=time) &
-												  Q(day=day))
-		elif (name != None) and (time == None) and (day == None):
-			timesheet = Timesheet.objects.filter(Q(name__name=name))
-		elif name == None and time != None and day == None:
-			timesheet = Timesheet.objects.filter(Q(time=time))
-		elif name == None and time == None and day != None:
-			timesheet = Timesheet.objects.filter(Q(day=day))
-
-
-		context = {
-			'timesheet': timesheet,
-			'names': Name.objects.all(),
-		}
 	return render(request, 'core/info.html', context=context)
 
+@login_required
+@require_POST
 def save(request):
-	form = TimesheetForm(request.POST or None)
 	if request.method == "POST":
-		if form.is_valid():
-			model_instance = form.save(commit=False)
-			model_instance.row = request.POST['row']
-			model_instance.column = request.POST['column']
-			model_instance.save()
-			return redirect('index')
+		p = Person.objects.get(user=request.user.id)
 
-	context = {
-		'names': Name.objects.all(),
-		'roles': Role.objects.all(),
-		'form': form,
-	}
-	return render(request, 'core/save.html', context=context)
+		t = TimeTable()
+		t.person = p
+		t.row = request.POST['row']
+		t.column = request.POST['column']
+		t.day = request.POST['day']
+		t.time = request.POST['time']
+		t.save()
+	
+	return redirect('index')
+
+def delete(request):
+	return redirect('index')
+

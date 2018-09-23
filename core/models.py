@@ -1,64 +1,58 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Name(models.Model):
-	name = models.CharField(max_length=100)
+ROLE_CHOICE = (
+	('Coordenador', 'Coordenador'),
+	('Diretor Presidente', 'Diretor Presidente'),
+	('Diretor Vice-Presidente', 'Diretor Vice-Presidente'),
+	('Diretor de Projetos', 'Diretor de Projetos'),
+	('Gerente de Projetos', 'Gerente de Projetos'),
+	('Diretor de Negócios', 'Diretor de Negócios'),
+	('Gerente de Marketing', 'Gerente de Marketing'),
+	('Diretor de Processos Internos', 'Diretor de Processos Internos'),
+	('Gerente de Produtos Internos', 'Gerente de Produtos Internos'),
+	('Membro', 'Membro'),
+)
 
-	def __str__(self):
-		return self.name
+TIME_CHOICE = (
+	('07:00', '07:00'),
+	('08:00', '08:00'),
+	('09:00', '09:00'),
+	('10:00', '10:00'),
+	('11:00', '11:00'),
+	('12:00', '12:00'),
+	('13:00', '13:00'),
+	('14:00', '14:00'),
+	('15:00', '15:00'),
+	('16:00', '16:00'),
+	('17:00', '17:00'),
+	('18:00', '18:00'),
+	('19:00', '19:00'),
+	('20:00', '20:00'),
+	('21:00', '21:00'),
+	('22:00', '22:00'),
+)
 
-class Role(models.Model):
-	ROLE_CHOICE = (
-		('Coordenador', 'Coordenador'),
-		('Diretor Presidente', 'Diretor Presidente'),
-		('Diretor Vice-Presidente', 'Diretor Vice-Presidente'),
-		('Diretor de Projetos', 'Diretor de Projetos'),
-		('Gerente de Projetos', 'Gerente de Projetos'),
-		('Diretor de Negócios', 'Diretor de Negócios'),
-		('Gerente de Marketing', 'Gerente de Marketing'),
-		('Diretor de Processos Internos', 'Diretor de Processos Internos'),
-		('Gerente de Produtos Internos', 'Gerente de Produtos Internos'),
-		('Membro', 'Membro'),
-	)
+DAY_CHOICE = (
+	('Dom', 'Dom'),
+	('Seg', 'Seg'),
+	('Ter', 'Ter'),
+	('Qua', 'Qua'),
+	('Qui', 'Qui'),
+	('Sex', 'Sex'),
+	('Sáb', 'Sáb'),
+)
 
+class Person(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	role = models.CharField(max_length=100, choices=ROLE_CHOICE)
 
-	def __str__(self):
-		return self.role
-
-class Timesheet(models.Model):
-	TIME_CHOICE = (
-		('07:00', '07:00'),
-		('08:00', '08:00'),
-		('09:00', '09:00'),
-		('10:00', '10:00'),
-		('11:00', '11:00'),
-		('12:00', '12:00'),
-		('13:00', '13:00'),
-		('14:00', '14:00'),
-		('15:00', '15:00'),
-		('16:00', '16:00'),
-		('17:00', '17:00'),
-		('18:00', '18:00'),
-		('19:00', '19:00'),
-		('20:00', '20:00'),
-		('21:00', '21:00'),
-		('22:00', '22:00'),
-	)
-
-	DAY_CHOICE = (
-		('Dom', 'Dom'),
-		('Seg', 'Seg'),
-		('Ter', 'Ter'),
-		('Qua', 'Qua'),
-		('Qui', 'Qui'),
-		('Sex', 'Sex'),
-		('Sáb', 'Sáb'),
-	)
-	name = models.ForeignKey(Name, on_delete=models.DO_NOTHING)
-	role = models.ForeignKey(Role, on_delete=models.DO_NOTHING)
+class TimeTable(models.Model):
 	time = models.CharField(max_length=10, choices=TIME_CHOICE)
 	day = models.CharField(max_length=10, choices=DAY_CHOICE)
 	row = models.IntegerField()
 	column = models.IntegerField()
+	person = models.ForeignKey(Person, on_delete=models.DO_NOTHING)
+

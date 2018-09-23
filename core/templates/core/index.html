@@ -9,243 +9,313 @@
 
 	<title>Timesheet</title>
 
-	<link rel="stylesheet" type="text/css" href = "{% static 'bootstrap/compiler/bootstrap.css' %}">
-    <link rel="stylesheet" type="text/css" href = "{% static 'style/table.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/compiler/bootstrap.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'style/table.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'style/main.css' %}">
 	<script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
 	<script src="{% static 'bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/compiler/style.css' %}">
 </head>
 
 <body>
-<div class="container">
-	<h2>TimeSheet EMakers</h2>
+	<nav class="navbar navbar-default navbar-fixed-top bg-light" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a target="_blank" href="#" class="navbar-brand">Timesheet</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-user"></span>
+							<strong>{{ user.get_username }}</strong>
+							<span class="glyphicon glyphicon-chevron-down"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<div class="navbar-login">
+									<div class="row">
+										<div class="col-lg-4">
+											<p class="text-center">
+												<span class="glyphicon glyphicon-user icon-size"></span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<div class="navbar-login navbar-login-session">
+									<div class="row">
+										<div class="col-md-4">
+											<p>
+												<a href="{% url 'account_logout' %}" class="btn btn-danger btn-block">Logout</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+		</div>
+	</nav>
 
-<!-- Form search -->
-{% block search %}
+	<div class="container">
+		<!-- Form search -->
+		{% block search %} {% endblock %}
 
-{% endblock %}
+		<table id="horario" class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Horário</th>
+					<th>Dom</th>
+					<th>Seg</th>
+					<th>Ter</th>
+					<th>Qua</th>
+					<th>Qui</th>
+					<th>Sex</th>
+					<th>Sáb</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>07:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>08:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>09:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>10:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>11:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>12:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>13:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>14:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>15:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>16:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>17:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>18:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>19:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>20:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>21:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>22:00</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
 
-	<table id="horario" class="table table-striped table-bordered">
-		<thead>
-		  	<tr>
-				<th>Horário</th>
-				<th>Dom</th>
-				<th>Seg</th>
-				<th>Ter</th>
-				<th>Qua</th>
-				<th>Qui</th>
-				<th>Sex</th>
-				<th>Sáb</th>
-		  	</tr>
-		</thead>
-		<tbody>
-		  	<tr>
-				<td>07:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-		  	</tr>
-		  	<tr>
-				<td>08:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-		 	</tr>
-		  	<tr>
-				<td>09:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-		 	</tr>
-		  	<tr>
-				<td>10:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-		  	</tr>
-		  	<tr>
-				<td>11:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-		 	</tr>
-		  	<tr>
-				<td>12:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-		  	</tr>
-		 	<tr>
-				<td>13:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-		 	</tr>
-		 	<tr>
-				<td>14:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-		 	</tr>
-		  	<tr>
-				<td>15:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-		  	<tr>
-				<td>16:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-		 	</tr>
-		  	<tr>
-				<td>17:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-		  	</tr>
-		  	<tr>
-				<td>18:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-		  	</tr>
-		  	<tr>
-				<td>19:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-		  	</tr>
-		  	<tr>
-				<td>20:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-		  	</tr>
-		  	<tr>
-				<td>21:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-		  	</tr>
-		  	<tr>
-				<td>22:00</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-		  	</tr>
-		</tbody>
-  	</table>
-
-  	{% for h in timesheet %}
+		{% for h in timetable %}
 		<script type="text/javascript">
-		    var x = document.getElementById("horario").rows[ {{ h.row }} ].cells;
-		    x[ {{ h.column }} ].innerHTML = "{{ h.name }}" + ", " + "{{ h.role }}";
-		</script>
-  	{% endfor %}
+			var x = document.getElementById("horario").rows[{{ h.row }} ].cells;
+			x[{{ h.column }} ].innerHTML = "{{ h.person.user.first_name }}" + ", " + "{{ h.person.role }}";
+		</script> 
+		{% endfor %}
 
-</div>
+	</div>
+	<!-- SAVE - UPDATE - DELETE -->
+	{% block manage %} {% endblock %}
 
-<!-- SAVE - UPDATE - DELETE -->
-{% block manage %}
+	<!-- MODAL -->
+	{% block modal %} {% endblock %}
 
-{% endblock %}
+	<script type="text/javascript">
+		// Get all td and assign an on click event for each one
+		var schedules = document.getElementsByTagName("td");
+		for (i = 0; i < schedules.length; i++) {
+			schedules[i].onclick = function () {
+				var row = this.closest('tr').rowIndex;
+				var column = this.closest('td').cellIndex;
+				// Event triggered when modal is showed. Used to mount form input properly
+				
+				var aux = document.getElementById("horario").rows[row].cells[column];
+				if(!aux.innerText){
+					$('#exampleModal').on('show.bs.modal', function () {
+						$('#exampleModalLabel').text("Cadastrar horario");
+						var table_r = document.getElementById("horario").rows[row].cells[0];
+						var table_c = document.getElementById("horario").rows[0].cells[column];
+						var modal = $(this);
+						modal.find("#modal_name").val("{{person.user.first_name}}");
+						modal.find("#modal_role").val("{{person.role}}")
+						modal.find("#modal_row").val(row);
+						modal.find("#modal_column").val(column);
+						modal.find("#modal_time").val(table_r.innerText);
+						modal.find("#modal_day").val(table_c.innerText);
+						// criando varios butao qd clica dnovo no quadradinho
+						var $new_button = $('<button/>').attr({ type: 'submit', name:'save', class:'btn btn-primary', value:'Salvar'}); 
+						$('#buttons').prepend($new_button)
+					});
 
-<!-- MODAL -->
-{% block modal %}
+				}else{
+					$('#exampleModal').on('show.bs.modal', function () {
+						$('#exampleModalLabel').text("Excluir horario");
+						var table_r = document.getElementById("horario").rows[row].cells[0];
+						var table_c = document.getElementById("horario").rows[0].cells[column];
+						var modal = $(this);
+						modal.find("#modal_name").val("{{person.user.first_name}}");
+						modal.find("#modal_role").val("{{person.role}}")
+						modal.find("#modal_row").val(row);
+						modal.find("#modal_column").val(column);
+						modal.find("#modal_hour").val(table_r.innerText);
+						modal.find("#modal_day").val(table_c.innerText);
+						var $new_button = $('<button/>').attr({ type: 'submit', name:'delete', class:'btn btn-primary', value:'Excluir'});
+						$('#buttons').prepend($new_button)
+					});
+				}
 
-{% endblock %}
+				if (column) $('#exampleModal').modal('show');
+			};
+		}
 
-<script type="text/javascript">
-    // Get all td and assign an on click event for each one
-    var schedules = document.getElementsByTagName("td");
-    for (i=0; i<schedules.length; i++) {
-        schedules[i].onclick = function () {
-            var row = this.closest('tr').rowIndex;
-            var column = this.closest('td').cellIndex;
-            // Event triggered when modal is showed. Used to mount form input properly
-            $('#exampleModal').on('show.bs.modal', function(){
-                var modal = $(this);
-                modal.find("#modal_row").val(row);
-                modal.find("#modal_column").val(column);
-            });
+		// nao funciona dar um jeito de clonar o elemento html
+		function createName() {
+			var select = document.getElementById("name-select");
+			var newSelect = select.cloneNode(true);
+			document.body.appendChild(newSelect)
+		}
 
-            if (column) $('#exampleModal').modal('show');
-        };
-    }
-
-	// nao funciona dar um jeito de clonar o elemento html
-	function createName(){
-	    var select = document.getElementById("name-select");
-	    var newSelect = select.cloneNode(true);
-		document.body.appendChild(newSelect)
-	}
-
-</script>
+	</script>
 
 </body>

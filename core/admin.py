@@ -1,18 +1,10 @@
 from django.contrib import admin
 
-from core.models import Timesheet, Name, Role
+from core.models import Person
 
 # Register your models here.
 
-class NameAdmin(admin.ModelAdmin):
-	list_display = ('name',)
+class PersonAdmin(admin.ModelAdmin):
+	list_display = ('role', )
 
-class RoleAdmin(admin.ModelAdmin):
-	list_display = ('role',)
-
-class TimesheetAdmin(admin.ModelAdmin):
-	list_display = ('name', 'role', 'time', 'day')
-
-admin.site.register(Timesheet, TimesheetAdmin)
-admin.site.register(Name, NameAdmin)
-admin.site.register(Role, RoleAdmin)
+admin.site.register(Person, PersonAdmin)

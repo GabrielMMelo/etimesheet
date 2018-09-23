@@ -10,8 +10,8 @@
 			<div id="name-select">
 				<select class="custom-select" name="name">
 					<option></option>
-					{% for n in names %}
-					<option value="{{ n.name }}">{{ n.name }}</option>
+					{% for u in users %}
+					<option value="{{ u }}">{{ u }}</option>
 					{% endfor %}
 				</select>
 			</div>
@@ -77,24 +77,29 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form>
+			<form method="post" action="{% url 'save'  %}">
+				{% csrf_token %}
 				<div class="modal-body">
 
 					<div class="row">
 						<div class="form-group col-md-6">
 							<label>Nome:</label>
+							<input type="text" readonly class="form-control-plaintext" id="modal_name" name="name">
 						</div>
 						<div class="form-group col-md-6">
 							<label>Cargo:</label>
+							<input type="text" readonly class="form-control-plaintext" id="modal_role" name=role>
 						</div>
 					</div>
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label>Horário:</label>
+							<input type="text" readonly class="form-control-plaintext" id="modal_time" name="time">
 						</div>
 						<div class="form-group col-md-6">
 							<label>Dia:</label>
+							<input type="text" readonly class="form-control-plaintext" id="modal_day" name="day">
 						</div>
 					</div>
 
@@ -109,7 +114,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer">
+				<div class="modal-footer" id="buttons">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				</div>
 			</form>
@@ -119,17 +124,5 @@
 {% endblock %}
 
 {% block manage %}
-<div class="container">
-	<div class="row">
-		<div class="col-md-4">
-			<a href="{% url 'save' %}"><input type="button" class="btn btn-outline-danger" value="Criar"></a>
-		</div>
-		<div class="col-md-4">
-			<a href=""><input type="button" class="btn btn-outline-danger" value="Editar"></a>
-		</div>
-		<div class="col-md-4">
-			<a href=""><input type="button" class="btn btn-outline-danger" value="Excluir"></a>
-		</div>
-	</div>
-</div>
+
 {% endblock %}
