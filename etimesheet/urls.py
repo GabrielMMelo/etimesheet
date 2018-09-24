@@ -24,4 +24,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('save/', views.save, name='save'),
     path('delete/', views.delete, name='delete'),
+    path('result/', views.result, name='result'),
 ]

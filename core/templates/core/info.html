@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block search %}
-<form method="POST" action="{% url 'index' %}">
+<form method="POST" action="{% url 'result' %}">
 {% csrf_token %}
 	<div class="row">
 		<div class="col">
@@ -11,7 +11,7 @@
 				<select class="custom-select" name="name">
 					<option></option>
 					{% for u in users %}
-					<option value="{{ u }}">{{ u }}</option>
+					<option value="{{ u.id }}">{{ u.get_full_name }}</option>
 					{% endfor %}
 				</select>
 			</div>
@@ -77,7 +77,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form method="post" action="{% url 'save'  %}">
+			<form method="post" action="{% url 'save'  %}" id="modal-form">
 				{% csrf_token %}
 				<div class="modal-body">
 
@@ -123,6 +123,81 @@
 </div>
 {% endblock %}
 
-{% block manage %}
+{% block scripts %}
+<script type="text/javascript">
+	// Get all td and assign an on click event for each one
+	var schedules = document.getElementsByTagName("td");
+	for (i = 0; i < schedules.length; i++) {
+		schedules[i].onclick = function () {
+			var row = this.closest('tr').rowIndex;
+			var column = this.closest('td').cellIndex;
+			// Event triggered when modal is showed. Used to mount form input properly
+			
+			var aux = document.getElementById("horario").rows[row].cells[column];
+			if(!aux.innerText){
+				$('#exampleModal').on('show.bs.modal', function () {
+					$('#exampleModalLabel').text("Cadastrar horario");
+					var table_r = document.getElementById("horario").rows[row].cells[0];
+					var table_c = document.getElementById("horario").rows[0].cells[column];
+					var modal = $(this);
+					modal.find("#modal_name").val("{{person.user.first_name}}");
+					modal.find("#modal_role").val("{{person.role}}")
+					modal.find("#modal_row").val(row);
+					modal.find("#modal_column").val(column);
+					modal.find("#modal_time").val(table_r.innerText);
+					modal.find("#modal_day").val(table_c.innerText);
+					// criando botao de salvar caso o campo de horario seja vazio
+					if(!$('#save').length > 0){
+						var $new_button = $('<button/>').attr({ type: 'submit', name:'save', class:'btn btn-primary', id:'save'});
+						$new_button.text('Salvar');
+						$('#buttons').prepend($new_button)
+					}
+					if($('#delete').length > 0){
+						$('#delete').remove();
+					}
+					if($('#modal-form').attr("action") == "/delete/"){
+						$('#modal-form').attr("action", "{% url 'save' %}");
+					}
+				});
+
+			}else{
+				$('#exampleModal').on('show.bs.modal', function () {
+					$('#exampleModalLabel').text("Excluir horario");
+					var table_r = document.getElementById("horario").rows[row].cells[0];
+					var table_c = document.getElementById("horario").rows[0].cells[column];
+					var modal = $(this);
+					modal.find("#modal_name").val("{{person.user.first_name}}");
+					modal.find("#modal_role").val("{{person.role}}")
+					modal.find("#modal_row").val(row);
+					modal.find("#modal_column").val(column);
+					modal.find("#modal_hour").val(table_r.innerText);
+					modal.find("#modal_day").val(table_c.innerText);
+					// criando botao de deletar caso o campo de horario esteja preenchido
+					if(!$('#delete').length > 0){
+						var $new_button = $('<button/>').attr({ type: 'submit', name:'delete', class:'btn btn-danger', id:'delete'});
+						$new_button.text('Excluir');
+						$('#buttons').prepend($new_button)
+					}
+					if($('#save').length > 0){
+						$('#save').remove();
+					}
+					if($('#modal-form').attr("action") == "/save/"){
+						$('#modal-form').attr("action", "{% url 'delete' %}");
+					}
+				});
+			}
+
+			if (column) $('#exampleModal').modal('show');
+		};
+	}
+
+	// nao funciona dar um jeito de clonar o elemento html
+	function createName() {
+		var select = document.getElementById("name-select");
+		var newSelect = select.cloneNode(true);
+		document.body.appendChild(newSelect)
+	}
+
+</script>
 
 {% endblock %}
