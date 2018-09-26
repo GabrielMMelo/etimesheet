@@ -19,7 +19,7 @@ def index(request):
 			'users': User.objects.all().exclude(is_superuser=True)
 		}
 
-	return render(request, 'core/info.html', context=context)
+	return render(request, 'core/index.html', context=context)
 
 @login_required
 @require_POST
@@ -83,6 +83,10 @@ def result(request):
 			timetable = TimeTable.objects.filter(
 				person__user__id__in=[name, request.user.id]
 			)	
+
+		if timetable == None:
+			messages.error(request, "Preencha os filtros corretamente! Filtro de nome é obrigatório.")
+			return redirect('index')
 
 		context = {
 			'timetable': timetable,
