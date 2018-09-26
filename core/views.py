@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.db.models import Q 
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 from core.forms import TimeTable
 from core.models import Person, TimeTable
@@ -61,10 +62,27 @@ def delete(request):
 def result(request):
 	if request.method == "POST":
 		name = request.POST['name']
+		time = request.POST['time']
+		day = request.POST['day']		
 
-		timetable = TimeTable.objects.filter(
-			person__user__id__in=[name, request.user.id]
-		)
+		timetable = None
+
+		if name != "" and time != "" and day != "":
+			timetable = TimeTable.objects.filter(
+				person__user__id__in=[name, request.user.id]
+			).filter(time=time).filter(day=day)
+		elif (name != "") and (time != "") and (day == ""):
+			timetable = TimeTable.objects.filter(
+					person__user__id__in=[name, request.user.id]
+			).filter(time=time)	
+		elif name != "" and time == "" and day != "":
+			timetable = TimeTable.objects.filter(
+				person__user__id__in=[name, request.user.id]
+			).filter(day=day)	
+		elif name != "" and time == "" and day == "":
+			timetable = TimeTable.objects.filter(
+				person__user__id__in=[name, request.user.id]
+			)	
 
 		context = {
 			'timetable': timetable,

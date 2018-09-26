@@ -250,14 +250,17 @@
 		{% for h in timetable %}
 		<script type="text/javascript">
 			var x = document.getElementById("horario").rows[{{ h.row }} ].cells[{{ h.column }} ];
-			x.innerHTML = "{{ h.person.user.first_name }}" + ", " + "{{ h.person.role }}";
+			if (x.innerText){
+				x.innerHTML += ", ";
+			}
+			x.innerHTML += "{{ h.person.user.first_name }}";
 		</script> 
 		{% endfor %}
 
 
 	</div>
-	<!-- SAVE - UPDATE - DELETE -->
-	{% block manage %} {% endblock %}
+	<!-- Result Filter-->
+	{% block result %} {% endblock %}
 
 	<!-- MODAL -->
 	{% block modal %} {% endblock %}
