@@ -229,30 +229,19 @@
 		</div>
 	</div>
 
-	<!-- Printa o resultado na tabela -->
-	{% for h in timetable %}
-	<script type="text/javascript">
-		var x = document.getElementById("horario").rows[{{ h.row }} ].cells[{{ h.column }} ];
-		if (x.innerText){
-			x.innerHTML += ", ";
-		}
-		x.innerHTML += "{{ h.person.user.first_name }}";
-	</script> 
-	{% endfor %}
+	{% block result %} {% endblock %}
 
 	<!-- Processa o resultado e coloca cor vermelho (conflito) e verde (horario livre)-->
-	{% block result %} {% endblock %}
+	{% block result_color %} {% endblock %}
 
 	<!-- MODAL -->
 	{% block modal %} {% endblock %}
 
 	<!-- Errors messages-->
 	{% if messages %}
-		<script>
 		{% for message in messages %}
-			alert("{{ message }}");
+		<script>alert("{{ message }}");</script>
 		{% endfor %}
-		</script>
 	{% endif %}	
 
 	<!-- JS scripts -->

@@ -128,6 +128,16 @@
 </div>
 {% endblock %}
 
+{% block result %}
+	<!-- Printa o horario so usuario na tabela -->
+	{% for h in timetable %}
+	<script type="text/javascript">
+		var x = document.getElementById("horario").rows[ {{h.row}} ].cells[ {{h.column}} ];
+		x.innerHTML = "{{ h.person.user.first_name }}";
+	</script> 
+	{% endfor %}
+{% endblock %}
+
 {% block scripts %}
 <script type="text/javascript">
 	// Get all td and assign an on click event for each one

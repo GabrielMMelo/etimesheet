@@ -1,19 +1,27 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block result %} 
+{% block result %}
+	<!-- Printa os horarios recuperados atraves do filtro -->
+	{% for h in timetable %}
+	<script type="text/javascript">
+		var x = document.getElementById("horario").rows[ {{h.row}} ].cells[ {{h.column}} ];
+		if (x.innerText){
+			x.innerHTML += ", ";
+		}
+		x.innerHTML += "{{ h.person.user.id }}";
+	</script> 
+	{% endfor %}
+{% endblock %}
+
+{% block result_color %} 
 <script type="text/javascript">
     var table = document.getElementById("horario");
     for (var i = 1; i < 17; i++) {
         for (var j = 1; j < 8; j++) {
             if (table.rows[i].cells[j].innerText){
-                if (table.rows[i].cells[j].innerText.indexOf(",") !== -1){
-                    table.rows[i].cells[j].style.backgroundColor = "red";
-                    table.rows[i].cells[j].innerHTML = " ";
-                }else{
-                    table.rows[i].cells[j].style.backgroundColor = "green";
-                    table.rows[i].cells[j].innerHTML = " ";
-                }
+                table.rows[i].cells[j].innerHTML = " ";
+                table.rows[i].cells[j].style.backgroundColor = "red";
             }else{
                 table.rows[i].cells[j].style.backgroundColor = "green";
             }
