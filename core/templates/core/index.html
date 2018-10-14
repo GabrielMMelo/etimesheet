@@ -17,7 +17,7 @@
 					</select>
 				</div>
 
-				<!--<button type="button" class="glyphicon glyphicon-plus btn btn-primary" onclick="createName()"></button>-->
+				<button id="add_name" type="button" class="fas fa-plus-circle btn btn-success" onclick="createName()"></button>
 			</div>
 
 			<div class="col-sm-3">
@@ -43,6 +43,9 @@
 						<option value="22:00">22:00</option>
 					</select>
 				</div>
+
+				<button id="add_time" type="button" class="fas fa-plus-circle btn btn-success" onclick="createTime()"></button>
+
 			</div>
 
 			<div class="col-sm-3">
@@ -59,6 +62,8 @@
 						<option value="Sáb">Sáb</option>
 					</select>
 				</div>
+
+				<button id="add_name" type="button" class="fas fa-plus-circle btn btn-success" onclick="createDay()"></button>
 			</div>
 			<div class="row justify-content-center align-items-center pt-4">
 				<div class="col-sm-3">
@@ -139,6 +144,7 @@
 {% endblock %}
 
 {% block scripts %}
+<!-- Adicionar e remover horarios -->
 <script type="text/javascript">
 	// Get all td and assign an on click event for each one
 	var schedules = document.getElementsByTagName("td");
@@ -206,14 +212,19 @@
 			if (column) $('#exampleModal').modal('show');
 		};
 	}
+</script>
 
-	// nao funciona dar um jeito de clonar o elemento html
-	/*function createName() {
-		var select = document.getElementById("name-select");
-		var newSelect = select.cloneNode(true);
-		document.getElementById("name-select").append(newSelect)
-	}*/
-
+<!-- Adicionar e remover select tag -->
+<script>
+	function createName() {
+    	$('#name-select:first').clone().insertAfter($('#name-select:last'));
+	}
+	function createTime() {
+    	$('#time-select:first').clone().insertAfter($('#time-select:last'));
+	}
+	function createDay() {
+    	$('#day-select:first').clone().insertAfter($('#day-select:last'));
+	}
 </script>
 
 {% endblock %}

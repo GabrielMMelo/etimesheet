@@ -61,27 +61,37 @@ def delete(request):
 @require_POST
 def result(request):
 	if request.method == "POST":
-		name = request.POST['name']
-		time = request.POST['time']
-		day = request.POST['day']		
+		name_id = request.POST.getlist('name')
+		time = request.POST.getlist('time')
+		day = request.POST.getlist('day')
+
+		name_id.append(str(request.user.id))
 
 		timetable = None
 
-		if name != "" and time != "" and day != "":
+		if name_id != [""] and time != [""] and day != [""]:
 			timetable = TimeTable.objects.filter(
-				person__user__id__in=[name, request.user.id]
-			).filter(time=time).filter(day=day)
-		elif (name != "") and (time != "") and (day == ""):
+				person__user__id__in=name_id
+			).filter(
+				time__in=time
+			).filter(
+				day__in=day
+			)
+		elif name_id != [""] and time != [""] and day == [""]:
 			timetable = TimeTable.objects.filter(
-					person__user__id__in=[name, request.user.id]
-			).filter(time=time)	
-		elif name != "" and time == "" and day != "":
+				person__user__id__in=name_id
+			).filter(
+				time__in=time
+			)	
+		elif name_id != [""] and time == [""] and day != [""]:
 			timetable = TimeTable.objects.filter(
-				person__user__id__in=[name, request.user.id]
-			).filter(day=day)	
-		elif name != "" and time == "" and day == "":
+				person__user__id__in=name_id
+			).filter(
+				day__in=day
+			)	
+		elif name_id != [""] and time == [""] and day == [""]:
 			timetable = TimeTable.objects.filter(
-				person__user__id__in=[name, request.user.id]
+				person__user__id__in=name_id
 			)	
 
 		if timetable == None:
@@ -91,4 +101,5 @@ def result(request):
 		context = {
 			'timetable': timetable,
 		}
+		
 	return render(request, 'core/result.html', context=context)
