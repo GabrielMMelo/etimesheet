@@ -65,7 +65,8 @@ def result(request):
 		time = request.POST.getlist('time')
 		day = request.POST.getlist('day')
 
-		name_id.append(str(request.user.id))
+		if name_id != [""]:
+			name_id.append(str(request.user.id))
 
 		timetable = None
 
@@ -101,5 +102,5 @@ def result(request):
 		context = {
 			'timetable': timetable,
 		}
-		
+
 	return render(request, 'core/result.html', context=context)
