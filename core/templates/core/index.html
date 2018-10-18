@@ -177,7 +177,7 @@
 					if($('#delete').length > 0){
 						$('#delete').remove();
 					}
-					if($('#modal-form').attr("action") == "/delete/"){
+					if($('#modal-form').attr("action") == "{% url 'delete' %}"){
 						$('#modal-form').attr("action", "{% url 'save' %}");
 					}
 				});
@@ -203,7 +203,7 @@
 					if($('#save').length > 0){
 						$('#save').remove();
 					}
-					if($('#modal-form').attr("action") == "/save/"){
+					if($('#modal-form').attr("action") == "{% url 'save' %}"){
 						$('#modal-form').attr("action", "{% url 'delete' %}");
 					}
 				});
