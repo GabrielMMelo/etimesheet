@@ -1,4 +1,4 @@
-# Timesheet from the junior company Emakers
+# Timesheet 
 
 ## Technologies utilized
 * Django 2.1
