@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="pt-br">
 
 <head>
 	<meta charset="utf-8">
@@ -9,10 +9,13 @@
 
 	<title>Timesheet</title>
 
-	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/bootstrap.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'style/table.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'style/main.css' %}">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+	{% comment %} CSS extra {% endcomment %}
+	{% block styles %} {% endblock %}
 
 </head>
 
@@ -22,229 +25,231 @@
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item ml-3 mr-5">
 					<a class="nav-link navbar-brand" href="{% url 'index' %}">Timesheet</a>
+					<a class="navbar-item navbar-text" href="{% url 'index' %}">Meu Horário</a>
 				</li>
 			</ul>
-			<a class="navbar-item navbar-text" href="{% url 'index' %}">Meu Horário</a>
-		<div class="navbar-collapse collapse">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Bem vindo, {{ user }}
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a class="dropdown-item" href="{% url 'account_logout' %}">Sair</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
+			<div class="navbar-collapse collapse">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Bem vindo, {{ user }}
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a class="dropdown-item" href="{% url 'account_logout' %}">Sair</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 
 	<div class="container pt-2">
 		<div class="table-responsive-sm">
-		<!-- Form search -->
-		{% block search %} {% endblock %}
+			<!-- Form search -->
+			{% block search %} {% endblock %}
 
-		<table id="horario" class="table table-striped table-bordered">
-			<thead>
-				<tr>
-					<th>Horário</th>
-					<th>Dom</th>
-					<th>Seg</th>
-					<th>Ter</th>
-					<th>Qua</th>
-					<th>Qui</th>
-					<th>Sex</th>
-					<th>Sáb</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>07:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>08:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>09:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>10:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>11:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>12:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>13:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>14:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>15:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>16:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>17:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>18:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>19:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>20:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>21:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>22:00</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
+			<table id="horario" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Horário</th>
+						<th>Dom</th>
+						<th>Seg</th>
+						<th>Ter</th>
+						<th>Qua</th>
+						<th>Qui</th>
+						<th>Sex</th>
+						<th>Sáb</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>07:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>08:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>09:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>10:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>11:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>12:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>13:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>14:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>15:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>16:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>17:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>18:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>19:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>20:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>21:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>22:00</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 
+	<!-- Resultado -->
 	{% block result %} {% endblock %}
 
-	<!-- Processa o resultado e coloca cor vermelho (conflito) e verde (horario livre)-->
+	<!-- Processa o resultado e coloca cor vermelho (conflito) e verde (horario livre) -->
 	{% block result_color %} {% endblock %}
 
 	<!-- MODAL -->
 	{% block modal %} {% endblock %}
 
-	<!-- Errors messages-->
+	<!-- Errors messages -->
 	{% if messages %}
 		{% for message in messages %}
 		<script>alert("{{ message }}");</script>
 		{% endfor %}
 	{% endif %}	
 
-	<!-- JS scripts -->
-	{% block scripts %} {% endblock %}
-
 	<script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
 	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-	
+
+	{% comment %} Extra JS scripts {% endcomment %}
+	{% block scripts %} {% endblock %}
 </body>
+
+</html>
