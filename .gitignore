@@ -1,4 +1,4 @@
 __pycache__/
 .vscode/
 venv/
-timesheet
+timesheet.sqlite3
