@@ -1,6 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.db.models.signals import post_delete, post_save
+from django.dispatch import receiver
+
+from logentries import LogentriesHandler
+import logging
+
 # Create your models here.
 
 ROLE_CHOICE = (
@@ -56,3 +62,22 @@ class TimeTable(models.Model):
 	column = models.IntegerField()
 	person = models.ForeignKey(Person, on_delete=models.DO_NOTHING)
 
+log = logging.getLogger('logentries')
+log.setLevel(logging.INFO)
+# test = LogentriesHandler("")
+# log.addHandler(test)
+log.info("Info message")
+
+def save_log(sender, instance, **kwargs):
+	print("foi")
+	log.warn("Warning message")
+	log.info("Info message")
+post_save.connect(save_log)
+
+
+def delete_log(sender, instance, **kwargs):
+	print("foi2")
+	log.warn("Warning message")
+	log.info("Info message")
+
+post_delete.connect(delete_log)
