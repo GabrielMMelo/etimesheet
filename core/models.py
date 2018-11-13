@@ -5,7 +5,7 @@ from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 
 from logentries import LogentriesHandler
-import logging
+from .logger import Logger
 
 # Create your models here.
 
@@ -62,22 +62,15 @@ class TimeTable(models.Model):
 	column = models.IntegerField()
 	person = models.ForeignKey(Person, on_delete=models.DO_NOTHING)
 
-log = logging.getLogger('logentries')
-log.setLevel(logging.INFO)
-# test = LogentriesHandler("")
-# log.addHandler(test)
-log.info("Info message")
 
 def save_log(sender, instance, **kwargs):
-	print("foi")
-	log.warn("Warning message")
-	log.info("Info message")
+	log = Logger.get_instance()
+	log.info('{} salvou um horario no dia {}'.format(instance.person.user.username, instance.day))
 post_save.connect(save_log)
 
 
 def delete_log(sender, instance, **kwargs):
-	print("foi2")
-	log.warn("Warning message")
-	log.info("Info message")
+	log = Logger.get_instance()
+	log.info('{} deletou um horario no dia {}'.format(instance.person.user.username, instance.day))
 
 post_delete.connect(delete_log)
