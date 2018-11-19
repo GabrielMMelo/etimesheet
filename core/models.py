@@ -66,11 +66,10 @@ class TimeTable(models.Model):
 def save_log(sender, instance, **kwargs):
 	log = Logger.get_instance()
 	log.info('{} salvou um horario no dia {}'.format(instance.person.user.username, instance.day))
-post_save.connect(save_log)
+post_save.connect(save_log, sender=TimeTable)
 
 
 def delete_log(sender, instance, **kwargs):
 	log = Logger.get_instance()
 	log.info('{} deletou um horario no dia {}'.format(instance.person.user.username, instance.day))
-
-post_delete.connect(delete_log)
+post_delete.connect(delete_log, sender=TimeTable)

@@ -131,6 +131,9 @@ ACCOUNT_SIGNUP_FORM_CLASS = "core.forms.PersonForm"
 
 SITE_ID = 1
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 30 * 60 #seconds
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
