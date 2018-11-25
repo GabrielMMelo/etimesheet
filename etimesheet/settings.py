@@ -127,7 +127,13 @@ ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 
+# evita brute force
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 3
+
 ACCOUNT_SIGNUP_FORM_CLASS = "core.forms.PersonForm"
+
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS=3
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 SITE_ID = 1
 
@@ -156,3 +162,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+#smtp
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = 'williamabreubr@gmail.com'
+EMAIL_HOST_PASSWORD = '*****'
