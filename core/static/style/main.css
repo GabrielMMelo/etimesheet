@@ -1,22 +1,19 @@
-.navbar-login
-{
+.navbar-login {
     width: 305px;
     padding: 10px;
     padding-bottom: 0px;
 }
 
-.navbar-login-session
-{
+.navbar-login-session {
     padding: 10px;
     padding-bottom: 0px;
     padding-top: 0px;
 }
 
-.icon-size
-{
+.icon-size {
     font-size: 87px;
 }
 
-#bold{
+#bold {
     font-weight: bold;
 }
