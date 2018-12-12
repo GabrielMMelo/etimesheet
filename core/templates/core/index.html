@@ -92,13 +92,9 @@
 				<div class="modal-body">
 
 					<div class="row">
-						<div class="form-group col-sm-6">
+						<div class="form-group col-sm-12">
 							<label id="bold">Nome:</label>
 							<input type="text" readonly class="form-control-plaintext" id="modal_name" name="name">
-						</div>
-						<div class="form-group col-sm-6">
-							<label id="bold">Cargo:</label>
-							<input type="text" readonly class="form-control-plaintext" id="modal_role" name=role>
 						</div>
 					</div>
 
@@ -163,7 +159,6 @@
 					var table_c = document.getElementById("horario").rows[0].cells[column];
 					var modal = $(this);
 					modal.find("#modal_name").val("{{person.user.first_name}}");
-					modal.find("#modal_role").val("{{person.role}}")
 					modal.find("#modal_row").val(row);
 					modal.find("#modal_column").val(column);
 					modal.find("#modal_time").val(table_r.innerText);
@@ -189,7 +184,6 @@
 					var table_c = document.getElementById("horario").rows[0].cells[column];
 					var modal = $(this);
 					modal.find("#modal_name").val("{{person.user.first_name}}");
-					modal.find("#modal_role").val("{{person.role}}")
 					modal.find("#modal_row").val(row);
 					modal.find("#modal_column").val(column);
 					modal.find("#modal_time").val(table_r.innerText);
