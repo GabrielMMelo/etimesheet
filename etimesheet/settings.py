@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from . import keys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ekmh&!i4u$6(tkd(kn7q&2ch+)5%j5j0e^3yf0yh%!x@chwr&$'
+SECRET_KEY = keys.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -82,14 +83,6 @@ WSGI_APPLICATION = 'etimesheet.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-     #'default': {
-     #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-     #    'NAME': 'timesheet',
-     #    'USER': 'postgres',
-     #    'PASSWORD': 'postgres',
-     #    'HOST': 'localhost',
-     #    'PORT': '5432',
-     #}
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': '/home/user/etimesheet/timesheet.sqlite3',
@@ -115,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-#allauth
+# allauth
 AUTHENTICATION_BACKENDS = [
 	'django.contrib.auth.backends.ModelBackend',
 	'allauth.account.auth_backends.AuthenticationBackend',
@@ -140,25 +133,21 @@ ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 3
 
 ACCOUNT_SIGNUP_FORM_CLASS = "core.forms.PersonForm"
 
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS=3
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3 
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 SITE_ID = 1
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-SESSION_COOKIE_AGE = 30 * 60 #seconds
+SESSION_COOKIE_AGE = 30 * 60 # seconds
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
 LANGUAGE_CODE = 'pt-br'
-
 TIME_ZONE = 'America/Sao_Paulo'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -173,7 +162,7 @@ MEDIA_URL = '/media/'
 
 #smtp
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = 'williamabreubr@gmail.com'
-EMAIL_HOST_PASSWORD = '$3nh4Pr0v1s0Ri@'
+EMAIL_HOST = keys.EMAIL_HOST
+EMAIL_PORT = keys.EMAIL_PORT
+EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = keys.EMAIL_USER
+EMAIL_HOST_PASSWORD = keys.EMAIL_PASSWORD

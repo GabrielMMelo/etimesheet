@@ -10,3 +10,6 @@ virtualenv/
 # databases
 *.sqlite3
 *.log
+
+# secret keys]
+keys.py
