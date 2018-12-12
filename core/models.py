@@ -8,19 +8,6 @@ from .logger import Logger
 
 # Create your models here.
 
-ROLE_CHOICE = (
-	('Coordenador', 'Coordenador'),
-	('Diretor Presidente', 'Diretor Presidente'),
-	('Diretor Vice-Presidente', 'Diretor Vice-Presidente'),
-	('Diretor de Projetos', 'Diretor de Projetos'),
-	('Gerente de Projetos', 'Gerente de Projetos'),
-	('Diretor de Negócios', 'Diretor de Negócios'),
-	('Gerente de Marketing', 'Gerente de Marketing'),
-	('Diretor de Processos Internos', 'Diretor de Processos Internos'),
-	('Gerente de Produtos Internos', 'Gerente de Produtos Internos'),
-	('Membro', 'Membro'),
-)
-
 TIME_CHOICE = (
 	('07:00', '07:00'),
 	('08:00', '08:00'),
@@ -52,7 +39,6 @@ DAY_CHOICE = (
 
 class Person(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	role = models.CharField(max_length=100, choices=ROLE_CHOICE)
 
 class TimeTable(models.Model):
 	time = models.CharField(max_length=10, choices=TIME_CHOICE)
@@ -64,11 +50,11 @@ class TimeTable(models.Model):
 
 def save_log(sender, instance, **kwargs):
 	log = Logger.get_instance()
-	log.info('{} salvou um horario no dia {}'.format(instance.person.user.username, instance.day))
+	log.info('{} salvou um horario no dia {} {}'.format(instance.person.user.username, instance.day, instance.time))
 post_save.connect(save_log, sender=TimeTable)
 
 
 def delete_log(sender, instance, **kwargs):
 	log = Logger.get_instance()
-	log.info('{} deletou um horario no dia {}'.format(instance.person.user.username, instance.day))
+	log.info('{} deletou um horario no dia {} {}'.format(instance.person.user.username, instance.day, instance.time))
 post_delete.connect(delete_log, sender=TimeTable)
