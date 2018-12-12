@@ -9,7 +9,7 @@ class Logger:
         Logger.__instance = logging.getLogger('etimesheet')
         Logger.__instance.setLevel(logging.DEBUG)
         # create file handler which logs even debug messages
-        fh = logging.FileHandler('timesheet.log')
+        fh = logging.FileHandler('/home/user/etimesheet/timesheet.log')
         fh.setLevel(logging.DEBUG)
         # create console handler with a higher log level
         ch = logging.StreamHandler()

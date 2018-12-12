@@ -23,10 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ekmh&!i4u$6(tkd(kn7q&2ch+)5%j5j0e^3yf0yh%!x@chwr&$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -42,8 +41,8 @@ INSTALLED_APPS = [
     'etimesheet',
     'core',
 
-	'allauth',
-	'allauth.account',
+    'allauth',
+    'allauth.account',
     'allauth.socialaccount',
 ]
 
@@ -55,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allow_cidr.middleware.AllowCIDRMiddleware',
 ]
 
 ROOT_URLCONF = 'etimesheet.urls'
@@ -82,17 +82,17 @@ WSGI_APPLICATION = 'etimesheet.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'timesheet',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'postgres',
-    #     'HOST': 'localhost',
-    #     'PORT': '',
-    # }
+     #'default': {
+     #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+     #    'NAME': 'timesheet',
+     #    'USER': 'postgres',
+     #    'PASSWORD': 'postgres',
+     #    'HOST': 'localhost',
+     #    'PORT': '5432',
+     #}
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'timesheet.sqlite3',
+        'NAME': '/home/user/etimesheet/timesheet.sqlite3',
     }
 }
 
@@ -176,4 +176,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = 'williamabreubr@gmail.com'
-EMAIL_HOST_PASSWORD = '*****'
+EMAIL_HOST_PASSWORD = '$3nh4Pr0v1s0Ri@'
